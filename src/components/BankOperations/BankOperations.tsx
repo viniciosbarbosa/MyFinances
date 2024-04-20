@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollar } from "@fortawesome/free-solid-svg-icons";
 import { faPercent } from "@fortawesome/free-solid-svg-icons/faPercent";
 import Button from "../shared/Button/Button";
+import { FormatMoney } from "../../utils/util";
 
 const BankOperations = ({
   currentTypeOperation,
@@ -79,7 +80,9 @@ const BankOperations = ({
           </CardHeader>
 
           <h3>
-            {currentValueOperation > 0 ? String(currentValueOperation) : "R$ 0"}
+            {currentValueOperation > 0
+              ? FormatMoney(String(currentValueOperation))
+              : "R$ 0"}
           </h3>
 
           {!renderInputForm && (
