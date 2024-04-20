@@ -1,4 +1,3 @@
-import React from "react";
 import { FinancialControlProps } from "../../models/interfaces/FinancialControlProps/FinancialControlProps";
 import FinanceContainer from "./FinancialControlStyle";
 import { BankStatment } from "../../models/interfaces/BankStatement/BankStatment";

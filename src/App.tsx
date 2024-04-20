@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import { BankStatment } from "./models/interfaces/BankStatement/BankStatment";
 import FinancialControl from "./components/FinancialControl/FinancialControl";
+import BankMoviments from "./components/BankMoviments/BankMoviments";
 
 function App() {
   const [currentBalacesBank, setCurrentBalacesBank] = useState(0);
@@ -27,16 +28,12 @@ function App() {
       });
 
       if (bankStatment.type == "input") {
-        console.log(currentBalacesBank);
-
         setCurrentBalacesBank(
           (prevBalances) => prevBalances + Number(bankStatment.value)
         );
       }
 
       if (bankStatment.type == "output") {
-        console.log(currentExpensesBank);
-
         setCurrentExpensesBank(
           (prevExpenses) => prevExpenses + Number(bankStatment.value)
         );
@@ -57,6 +54,8 @@ function App() {
         balanceBank={currentBalacesBank}
         expensesBank={currentExpensesBank}
       />
+
+      <BankMoviments bankMovementList={bankStatementItens} />
     </>
   );
 }

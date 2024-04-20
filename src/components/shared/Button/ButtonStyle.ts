@@ -16,7 +16,7 @@ const ButtonComponent = styled.button<ButtonProps>`
   line-height: 1.15;
   font-size: 17px;
 
-  &::disabled {
+  &:disabled {
     background-color: #e43f4d43;
   }
 
