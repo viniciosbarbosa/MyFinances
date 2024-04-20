@@ -19,6 +19,7 @@ const BankOperations = ({
   currentValueOperation,
   emitNewStament,
   title,
+  balanceValue,
 }: BankOperationsProps) => {
   const [renderInputForm, setRenderInputForm] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
@@ -45,14 +46,29 @@ const BankOperations = ({
       return false;
     }
 
-    console.log(currentValueOperation);
+    console.log(currentTypeOperation === "input");
 
-    hideInputForm();
-    emitNewStament({
-      name: inputNameOperation,
-      value: inputValueOperation,
-      type: currentTypeOperation,
-    });
+    if (
+      balanceValue !== undefined &&
+      balanceValue >= Number(inputValueOperation)
+    ) {
+      hideInputForm();
+      emitNewStament({
+        name: inputNameOperation,
+        value: inputValueOperation,
+        type: currentTypeOperation,
+      });
+    } else if (currentTypeOperation === "input") {
+      hideInputForm();
+      emitNewStament({
+        name: inputNameOperation,
+        value: inputValueOperation,
+        type: currentTypeOperation,
+      });
+    } else {
+      alert("Saldo Insuficiente , favor fazer um deposito !");
+      hideInputForm();
+    }
   };
 
   const handleInputForm = (
@@ -91,6 +107,7 @@ const BankOperations = ({
               action={handleRenderInput}
               priority={currentTypeOperation}
               title={title === "Saldo" ? "Entrada" : "Saida"}
+              disable={balanceValue == 0}
             />
           )}
 
