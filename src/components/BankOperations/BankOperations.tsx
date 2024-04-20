@@ -45,6 +45,8 @@ const BankOperations = ({
       return false;
     }
 
+    console.log(currentValueOperation);
+
     hideInputForm();
     emitNewStament({
       name: inputNameOperation,
@@ -65,7 +67,6 @@ const BankOperations = ({
       : setIsFormValid(false);
     setGenericInput(eventValue);
   };
-
   return (
     <>
       <Container>
