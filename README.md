@@ -23,6 +23,12 @@ export default {
     tsconfigRootDir: __dirname,
   },
 }
+
+icons com
+yarn add @fortawesome/fontawesome-svg-core
+yarn add dd @fortawesome/free-regular-svg-icons
+yarn add @fortawesome/free-solid-svg-icons
+yarn add @fortawesome/react-fontawesome@latest
 ```
 
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
