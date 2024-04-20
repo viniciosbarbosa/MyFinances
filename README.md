@@ -24,7 +24,7 @@ export default {
   },
 }
 
-icons com
+FontIcon
 yarn add @fortawesome/fontawesome-svg-core
 yarn add dd @fortawesome/free-regular-svg-icons
 yarn add @fortawesome/free-solid-svg-icons
