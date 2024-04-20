@@ -1,6 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { BankOperationsProps } from "../../models/interfaces/BankOperationsProps/BankOperationsProps";
-import { Card, CardHeader, Container } from "./BankOperationsSytle";
+import {
+  ActionsContainer,
+  Card,
+  CardHeader,
+  Container,
+  FormContainer,
+  FormInput,
+} from "./BankOperationsSytle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollar } from "@fortawesome/free-solid-svg-icons";
 import { faPercent } from "@fortawesome/free-solid-svg-icons/faPercent";
@@ -26,7 +33,38 @@ const BankOperations = ({
     setInputValueOperation("");
   };
 
-  console.log(currentTypeOperation);
+  const formSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (
+      inputNameOperation.trim().length === 0 ||
+      inputValueOperation.trim().length === 0
+    ) {
+      setIsFormValid(false);
+      return false;
+    }
+
+    hideInputForm();
+    emitNewStament({
+      name: inputNameOperation,
+      value: inputValueOperation,
+      type: currentTypeOperation,
+    });
+  };
+
+  const handleInputForm = (
+    event: React.FormEvent<HTMLInputElement>,
+    genericInput: string,
+    setGenericInput: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    const eventTarget = event.currentTarget as HTMLInputElement;
+    const eventValue = eventTarget.value;
+    genericInput.trim().length > 0
+      ? setIsFormValid(true)
+      : setIsFormValid(false);
+    setGenericInput(eventValue);
+  };
+
   return (
     <>
       <Container>
@@ -50,6 +88,48 @@ const BankOperations = ({
               priority={currentTypeOperation}
               title={title === "Saldo" ? "Entrada" : "Saida"}
             />
+          )}
+
+          {renderInputForm && (
+            <form onSubmit={formSubmitHandler}>
+              <FormContainer invalid={!isFormValid}>
+                <FormInput
+                  type="text"
+                  placeholder="Nome"
+                  value={inputNameOperation}
+                  onChange={(event) =>
+                    handleInputForm(
+                      event,
+                      inputNameOperation,
+                      setInputNameOperation
+                    )
+                  }
+                />
+
+                <FormInput
+                  type="text"
+                  placeholder="Valor"
+                  value={inputValueOperation}
+                  onChange={(event) =>
+                    handleInputForm(
+                      event,
+                      inputValueOperation,
+                      setInputValueOperation
+                    )
+                  }
+                />
+              </FormContainer>
+
+              <ActionsContainer>
+                <Button
+                  title="Cancelar"
+                  priority="output"
+                  action={hideInputForm}
+                />
+
+                <Button title="Adicionar" priority="input" type="submit" />
+              </ActionsContainer>
+            </form>
           )}
         </Card>
       </Container>

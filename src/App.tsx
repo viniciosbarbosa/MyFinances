@@ -27,14 +27,18 @@ function App() {
       });
 
       if (bankStatment.type == "input") {
+        console.log(currentBalacesBank);
+
         setCurrentBalacesBank(
           (prevBalances) => prevBalances + Number(bankStatment.value)
         );
       }
 
       if (bankStatment.type == "output") {
+        console.log(currentExpensesBank);
+
         setCurrentExpensesBank(
-          (prevExpenses) => prevExpenses - Number(bankStatment.value)
+          (prevExpenses) => prevExpenses + Number(bankStatment.value)
         );
 
         currentBalacesBank > 0 &&

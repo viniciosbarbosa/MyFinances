@@ -1,6 +1,6 @@
 export interface BankStatment {
   name: string;
   value: string;
-  type: "input" | "output";
+  type: "input" | "output" | string;
   id?: string;
 }
