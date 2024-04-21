@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import { BankStatment } from "./models/interfaces/BankStatement/BankStatment";
 import FinancialControl from "./components/FinancialControl/FinancialControl";
 import BankMoviments from "./components/BankMoviments/BankMoviments";
+import { FilterDatasLocalStorage } from "./models/interfaces/FilterDatasLocalStorage/FilterDatasLocalStorage";
 
 function App() {
   const [currentBalacesBank, setCurrentBalacesBank] = useState(0);
@@ -28,9 +29,45 @@ function App() {
     const getDatas = () => {
       if (datasLocalStorage !== null && datasLocalStorage !== undefined) {
         const dataJsonLocalStorage = JSON.parse(datasLocalStorage);
+        filterDatasLocalStorage({
+          filter: "input",
+          datas: dataJsonLocalStorage,
+        });
+        filterDatasLocalStorage({
+          filter: "output",
+          datas: dataJsonLocalStorage,
+        });
         setBankStatementItens(dataJsonLocalStorage);
       } else {
         return;
+      }
+    };
+
+    const filterDatasLocalStorage = ({
+      filter,
+      datas,
+    }: FilterDatasLocalStorage) => {
+      const dataOperationView = (paramOperation: string) => {
+        const dataBalanceBank: BankStatment[] = datas.filter(
+          (dataBalance) => dataBalance.type === paramOperation
+        );
+
+        const totalValueBalanceBank = dataBalanceBank.reduce(
+          (total, data) => total + parseFloat(data.value),
+          0
+        );
+
+        return totalValueBalanceBank;
+      };
+
+      if (filter === "input") {
+        const balanceBank = dataOperationView("input");
+        const expenseBank = dataOperationView("output");
+
+        setCurrentBalacesBank(balanceBank - expenseBank);
+      } else if (filter === "output") {
+        const expenseBank = dataOperationView("output");
+        setCurrentExpensesBank(expenseBank);
       }
     };
 
