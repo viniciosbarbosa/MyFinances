@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import { BankStatment } from "./models/interfaces/BankStatement/BankStatment";
 import FinancialControl from "./components/FinancialControl/FinancialControl";
 import BankMoviments from "./components/BankMoviments/BankMoviments";
+import { json } from "react-router-dom";
 
 function App() {
   const [currentBalacesBank, setCurrentBalacesBank] = useState(0);
@@ -11,6 +12,22 @@ function App() {
   const [bankStatementItens, setBankStatementItens] = useState<
     Array<BankStatment>
   >([]);
+
+  const setDatasLocalStorage = () => {
+    const datasOperationsBank = JSON.stringify(bankStatementItens);
+    console.log(datasOperationsBank);
+    localStorage.setItem("datasBank", datasOperationsBank);
+  };
+
+  useEffect(() => {
+    const datasLocalStorage = localStorage.getItem("datasBank");
+    if (datasLocalStorage !== null) {
+      const dataJsonLocalStorage = JSON.parse(datasLocalStorage);
+      setBankStatementItens(dataJsonLocalStorage);
+    } else {
+      return;
+    }
+  }, []);
 
   const setNewBankStament = (bankStatment: BankStatment) => {
     if (bankStatment) {
@@ -24,6 +41,7 @@ function App() {
           id: Math.random().toString(),
         });
 
+        setDatasLocalStorage();
         return bankStatmentsArray;
       });
 
