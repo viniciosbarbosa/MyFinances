@@ -4,7 +4,6 @@ import Header from "./components/Header/Header";
 import { BankStatment } from "./models/interfaces/BankStatement/BankStatment";
 import FinancialControl from "./components/FinancialControl/FinancialControl";
 import BankMoviments from "./components/BankMoviments/BankMoviments";
-import { json } from "react-router-dom";
 
 function App() {
   const [currentBalacesBank, setCurrentBalacesBank] = useState(0);
@@ -13,20 +12,29 @@ function App() {
     Array<BankStatment>
   >([]);
 
-  const setDatasLocalStorage = () => {
-    const datasOperationsBank = JSON.stringify(bankStatementItens);
-    console.log(datasOperationsBank);
-    localStorage.setItem("datasBank", datasOperationsBank);
+  const setDatasLocalStorage = (
+    newDataToLocalStorage?: Array<BankStatment>
+  ) => {
+    if (newDataToLocalStorage) {
+      const datasOperationsBank = JSON.stringify(newDataToLocalStorage);
+
+      localStorage.setItem("datasBank", datasOperationsBank);
+    }
   };
 
   useEffect(() => {
     const datasLocalStorage = localStorage.getItem("datasBank");
-    if (datasLocalStorage !== null) {
-      const dataJsonLocalStorage = JSON.parse(datasLocalStorage);
-      setBankStatementItens(dataJsonLocalStorage);
-    } else {
-      return;
-    }
+
+    const getDatas = () => {
+      if (datasLocalStorage !== null && datasLocalStorage !== undefined) {
+        const dataJsonLocalStorage = JSON.parse(datasLocalStorage);
+        setBankStatementItens(dataJsonLocalStorage);
+      } else {
+        return;
+      }
+    };
+
+    getDatas();
   }, []);
 
   const setNewBankStament = (bankStatment: BankStatment) => {
@@ -41,7 +49,7 @@ function App() {
           id: Math.random().toString(),
         });
 
-        setDatasLocalStorage();
+        setDatasLocalStorage(bankStatmentsArray);
         return bankStatmentsArray;
       });
 
@@ -73,7 +81,11 @@ function App() {
         expensesBank={currentExpensesBank}
       />
 
-      <BankMoviments bankMovementList={bankStatementItens} />
+      <BankMoviments
+        bankMovementList={bankStatementItens}
+        setBankStatementItens={setBankStatementItens}
+        setDatasLocalStorage={setDatasLocalStorage}
+      />
     </>
   );
 }

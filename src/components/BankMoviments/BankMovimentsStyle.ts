@@ -25,17 +25,19 @@ const MovimentsContainer = styled.div`
 
 const Movimentation = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 70%;
   height: 8vh;
   background-color: #36383e;
-  border-radius: 2.4rem;
+  border-radius: 1.1rem;
 
   h2 {
     font-weight: 500;
     font-size: 2.2rem;
     color: #dddcda;
+    position: relative;
+    left: 6rem;
   }
 
   h3 {
@@ -44,4 +46,23 @@ const Movimentation = styled.div`
   }
 `;
 
-export { MovimentsHeader, MovimentsContainer, Movimentation };
+const MovimentDelete = styled.button`
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  background: transparent;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  position: relative;
+  right: 6rem;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+`;
+
+export { MovimentsHeader, MovimentsContainer, Movimentation, MovimentDelete };

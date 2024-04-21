@@ -1,14 +1,33 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BankMovementProps } from "../../models/interfaces/BankMovementProps/BankMovementProps";
 import {
+  MovimentDelete,
   Movimentation,
   MovimentsContainer,
   MovimentsHeader,
 } from "./BankMovimentsStyle";
-import { faMoneyBillTransfer } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMoneyBillTransfer,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FormatMoney } from "../../utils/util";
 
-const BankMoviments = ({ bankMovementList }: BankMovementProps) => {
+const BankMoviments = ({
+  bankMovementList,
+  setBankStatementItens,
+  setDatasLocalStorage,
+}: BankMovementProps) => {
+  /* */
+
+  const handleDeleteMovement = (idBankMovement: string) => {
+    const DatasBankList = bankMovementList.filter(
+      (bankMovement) => bankMovement.id !== idBankMovement
+    );
+
+    setBankStatementItens(DatasBankList);
+    setDatasLocalStorage(DatasBankList);
+  };
+
   return (
     <div>
       <MovimentsHeader>
@@ -33,6 +52,12 @@ const BankMoviments = ({ bankMovementList }: BankMovementProps) => {
                 {moviment.type === "input" ? "+ " : "- "}
                 {FormatMoney(moviment.value)}
               </h3>
+
+              <MovimentDelete
+                onClick={() => moviment.id && handleDeleteMovement(moviment.id)}
+              >
+                <FontAwesomeIcon icon={faTrash} size="2x" color="#e43f4d" />
+              </MovimentDelete>
             </Movimentation>
           </MovimentsContainer>
         ))}

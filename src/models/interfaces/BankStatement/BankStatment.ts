@@ -3,4 +3,5 @@ export interface BankStatment {
   value: string;
   type: "input" | "output" | string;
   id?: string;
+  newDataToLocalStorage?: string;
 }

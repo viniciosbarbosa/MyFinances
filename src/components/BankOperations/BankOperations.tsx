@@ -46,8 +46,6 @@ const BankOperations = ({
       return false;
     }
 
-    console.log(currentTypeOperation === "input");
-
     if (
       balanceValue !== undefined &&
       balanceValue >= Number(inputValueOperation)
