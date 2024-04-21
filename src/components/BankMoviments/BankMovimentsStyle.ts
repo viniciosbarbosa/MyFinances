@@ -65,4 +65,22 @@ const MovimentDelete = styled.button`
   }
 `;
 
-export { MovimentsHeader, MovimentsContainer, Movimentation, MovimentDelete };
+const MovimentFilter = styled.button`
+  background: transparent;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+export {
+  MovimentsHeader,
+  MovimentsContainer,
+  Movimentation,
+  MovimentDelete,
+  MovimentFilter,
+};

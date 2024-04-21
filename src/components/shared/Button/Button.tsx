@@ -1,4 +1,3 @@
-import React from "react";
 import { ButtonProps } from "../../../models/interfaces/ButtonProps/ButtonProps";
 import { ButtonComponent } from "./ButtonStyle";
 

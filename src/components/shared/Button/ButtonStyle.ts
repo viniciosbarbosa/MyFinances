@@ -12,10 +12,10 @@ const ButtonComponent = styled.button<ButtonProps>`
   border-radius: 3px;
   padding: 12px 24px;
   border: 0;
-  color: #242529;
+  color: #fafafa;
   line-height: 1.15;
   font-size: 17px;
-
+  transition: 0.3s;
   &:disabled {
     background-color: #e43f4d43;
   }

@@ -2,15 +2,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BankMovementProps } from "../../models/interfaces/BankMovementProps/BankMovementProps";
 import {
   MovimentDelete,
+  MovimentFilter,
   Movimentation,
   MovimentsContainer,
   MovimentsHeader,
 } from "./BankMovimentsStyle";
 import {
+  faHandHoldingDollar,
   faMoneyBillTransfer,
+  faReceipt,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FormatMoney } from "../../utils/util";
+import { useEffect, useState } from "react";
+import { BankStatment } from "../../models/interfaces/BankStatement/BankStatment";
 
 const BankMoviments = ({
   bankMovementList,
@@ -18,6 +23,12 @@ const BankMoviments = ({
   setDatasLocalStorage,
 }: BankMovementProps) => {
   /* */
+
+  const [dataFilter, setDatasFilter] = useState<BankStatment[]>([]);
+
+  useEffect(() => {
+    setDatasFilter(bankMovementList);
+  }, [bankMovementList]);
 
   const handleDeleteMovement = (idBankMovement: string) => {
     const DatasBankList = bankMovementList.filter(
@@ -28,19 +39,62 @@ const BankMoviments = ({
     setDatasLocalStorage(DatasBankList);
   };
 
+  const filterBalace = () => {
+    const allBalance = bankMovementList.filter((bankBalance) => {
+      return bankBalance.type === "input";
+    });
+    setDatasFilter(allBalance);
+  };
+
+  const filterExpense = () => {
+    const allBalance = bankMovementList.filter((bankBalance) => {
+      return bankBalance.type === "output";
+    });
+    setDatasFilter(allBalance);
+  };
+
+  const filterAllDatas = () => {
+    const allBalance = bankMovementList.filter((bankBalance) => {
+      return bankBalance.type;
+    });
+
+    console.log(allBalance);
+
+    setDatasFilter(allBalance);
+  };
+
   return (
     <div>
       <MovimentsHeader>
-        <FontAwesomeIcon icon={faMoneyBillTransfer} color="#4ae081" size="2x" />
+        <MovimentFilter onClick={filterAllDatas}>
+          <FontAwesomeIcon
+            icon={faMoneyBillTransfer}
+            color="#f2e60e"
+            size="2x"
+          />
+        </MovimentFilter>
+
         <h2>
           {bankMovementList.length > 0
             ? "Movimentações"
             : "Sem movimentações a exibir"}
         </h2>
+
+        <MovimentFilter onClick={filterBalace}>
+          <FontAwesomeIcon
+            icon={faHandHoldingDollar}
+            size="3x"
+            color="#5ce081"
+          />
+        </MovimentFilter>
+
+        <MovimentFilter onClick={filterExpense}>
+          <FontAwesomeIcon icon={faReceipt} size="3x" color="#e43f4e" />
+        </MovimentFilter>
       </MovimentsHeader>
 
-      {bankMovementList.length > 0 &&
-        bankMovementList.map((moviment) => (
+      {dataFilter.length > 0 &&
+        dataFilter.map((moviment) => (
           <MovimentsContainer key={moviment.id}>
             <Movimentation>
               <h2>{moviment.name}</h2>

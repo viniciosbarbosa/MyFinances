@@ -23,6 +23,34 @@ function App() {
     }
   };
 
+  const filterDatasLocalStorage = ({
+    filter,
+    datas,
+  }: FilterDatasLocalStorage) => {
+    const dataOperationView = (paramOperation: string) => {
+      const dataBalanceBank: BankStatment[] = datas.filter(
+        (dataBalance) => dataBalance.type === paramOperation
+      );
+
+      const totalValueBalanceBank = dataBalanceBank.reduce(
+        (total, data) => total + parseFloat(data.value),
+        0
+      );
+
+      return totalValueBalanceBank;
+    };
+
+    if (filter === "input") {
+      const balanceBank = dataOperationView("input");
+      const expenseBank = dataOperationView("output");
+
+      setCurrentBalacesBank(balanceBank - expenseBank);
+    } else if (filter === "output") {
+      const expenseBank = dataOperationView("output");
+      setCurrentExpensesBank(expenseBank);
+    }
+  };
+
   useEffect(() => {
     const datasLocalStorage = localStorage.getItem("datasBank");
 
@@ -40,34 +68,6 @@ function App() {
         setBankStatementItens(dataJsonLocalStorage);
       } else {
         return;
-      }
-    };
-
-    const filterDatasLocalStorage = ({
-      filter,
-      datas,
-    }: FilterDatasLocalStorage) => {
-      const dataOperationView = (paramOperation: string) => {
-        const dataBalanceBank: BankStatment[] = datas.filter(
-          (dataBalance) => dataBalance.type === paramOperation
-        );
-
-        const totalValueBalanceBank = dataBalanceBank.reduce(
-          (total, data) => total + parseFloat(data.value),
-          0
-        );
-
-        return totalValueBalanceBank;
-      };
-
-      if (filter === "input") {
-        const balanceBank = dataOperationView("input");
-        const expenseBank = dataOperationView("output");
-
-        setCurrentBalacesBank(balanceBank - expenseBank);
-      } else if (filter === "output") {
-        const expenseBank = dataOperationView("output");
-        setCurrentExpensesBank(expenseBank);
       }
     };
 
