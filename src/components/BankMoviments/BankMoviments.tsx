@@ -1,8 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BankMovementProps } from "../../models/interfaces/BankMovementProps/BankMovementProps";
 import {
-  BalanceBtn,
-  ExpenseBtn,
   Movimentation,
   MovimentsContainer,
   MovimentsHeader,
@@ -28,11 +26,9 @@ const BankMoviments = ({ bankMovementList }: BankMovementProps) => {
             <Movimentation>
               <h2>{moviment.name}</h2>
               <h3
-                className={
-                  moviment.type === "input"
-                    ? BalanceBtn.styledComponentId
-                    : ExpenseBtn.styledComponentId
-                }
+                style={{
+                  color: moviment.type === "input" ? "#4ae081" : "#e43f4d",
+                }}
               >
                 {moviment.type === "input" ? "+ " : "- "}
                 {FormatMoney(moviment.value)}

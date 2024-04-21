@@ -5,4 +5,5 @@ export interface BankOperationsProps {
   currentValueOperation: number;
   currentTypeOperation: string;
   title: string;
+  balanceValue?: number;
 }

@@ -44,18 +44,4 @@ const Movimentation = styled.div`
   }
 `;
 
-const BalanceBtn = styled.div`
-  color: #4ae081;
-`;
-
-const ExpenseBtn = styled.div`
-  color: #e43f4d;
-`;
-
-export {
-  MovimentsHeader,
-  MovimentsContainer,
-  Movimentation,
-  BalanceBtn,
-  ExpenseBtn,
-};
+export { MovimentsHeader, MovimentsContainer, Movimentation };

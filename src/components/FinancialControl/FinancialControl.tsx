@@ -26,6 +26,7 @@ const FinancialControl = ({
         emitNewStament={receiveNewBankStatement}
         currentTypeOperation="output"
         currentValueOperation={expensesBank}
+        balanceValue={balanceBank}
       />
     </FinanceContainer>
   );
