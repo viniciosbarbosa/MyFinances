@@ -12,6 +12,11 @@ const MovimentsHeader = styled.header`
     font-size: 2.2rem;
     color: #dddcda;
   }
+
+  @media (max-width: 500px) {
+    display: block;
+    text-align: center;
+  }
 `;
 
 const MovimentsContainer = styled.div`
@@ -21,6 +26,9 @@ const MovimentsContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  @media (max-width: 500px) {
+    margin-bottom: 3rem;
+  }
 `;
 
 const Movimentation = styled.div`
@@ -28,7 +36,7 @@ const Movimentation = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 70%;
-  height: 8vh;
+  height: 10vh;
   background-color: #36383e;
   border-radius: 1.1rem;
 
@@ -43,6 +51,18 @@ const Movimentation = styled.div`
   h3 {
     font-weight: 500;
     font-size: 2.2rem;
+  }
+
+  @media (max-width: 500px) {
+    width: 90%;
+    height: auto;
+    display: block;
+
+    h2,
+    h3 {
+      left: 0px;
+      text-align: center;
+    }
   }
 `;
 
@@ -63,6 +83,13 @@ const MovimentDelete = styled.button`
   &:hover {
     transform: scale(1.15);
   }
+
+  @media (max-width: 500px) {
+    left: initial;
+    right: 1rem;
+    bottom: 1rem;
+    float: inline-end;
+  }
 `;
 
 const MovimentFilter = styled.button`
@@ -74,6 +101,10 @@ const MovimentFilter = styled.button`
 
   &:hover {
     transform: scale(1.05);
+  }
+
+  @media (max-width: 500px) {
+    padding: 2rem;
   }
 `;
 

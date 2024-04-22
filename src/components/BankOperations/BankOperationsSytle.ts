@@ -17,6 +17,13 @@ const Card = styled.div`
   height: 300px;
   border-radius: 1.2rem;
 
+  @media (max-width: 500px) {
+    margin-bottom: 1.5rem;
+    margin: 20px;
+    padding: 20px 0px;
+    height: auto;
+  }
+
   & h2 {
     margin-left: 1rem;
     font-weight: 500;
@@ -46,6 +53,10 @@ const FormContainer = styled.div<FormContainerProps>`
   align-items: center;
   gap: 0.8rem;
 
+  @media (max-width: 500px) {
+    display: block;
+  }
+
   input {
     background: ${(props: FormContainerProps) =>
       props.invalid ? "#e43f4d7a" : "transparent"};
@@ -70,6 +81,14 @@ const FormInput = styled.input`
   font-weight: 400;
   height: 30px;
   transition: all 0.2s ease;
+
+  @media (max-width: 500px) {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+    height: auto;
+  }
 
   &:hover {
     box-shadow: 0 0 0 0 #fff inset, #4ae081 0 0 0 2px;

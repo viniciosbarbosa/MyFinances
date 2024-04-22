@@ -8,6 +8,14 @@ const FinanceContainer = styled.div`
   > div:nth-child(2) {
     margin-left: 1.5rem;
   }
+
+  @media (max-width: 500px) {
+    > div:nth-child(2) {
+      margin-left: 0;
+    }
+
+    display: block;
+  }
 `;
 
 export default FinanceContainer;

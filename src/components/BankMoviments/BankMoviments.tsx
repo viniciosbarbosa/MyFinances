@@ -66,6 +66,12 @@ const BankMoviments = ({
   return (
     <div>
       <MovimentsHeader>
+        <h2>
+          {bankMovementList.length > 0
+            ? "Movimentações"
+            : "Sem movimentações a exibir"}
+        </h2>
+
         <MovimentFilter onClick={filterAllDatas}>
           <FontAwesomeIcon
             icon={faMoneyBillTransfer}
@@ -74,22 +80,16 @@ const BankMoviments = ({
           />
         </MovimentFilter>
 
-        <h2>
-          {bankMovementList.length > 0
-            ? "Movimentações"
-            : "Sem movimentações a exibir"}
-        </h2>
-
         <MovimentFilter onClick={filterBalace}>
           <FontAwesomeIcon
             icon={faHandHoldingDollar}
-            size="3x"
+            size="2x"
             color="#5ce081"
           />
         </MovimentFilter>
 
         <MovimentFilter onClick={filterExpense}>
-          <FontAwesomeIcon icon={faReceipt} size="3x" color="#e43f4e" />
+          <FontAwesomeIcon icon={faReceipt} size="2x" color="#e43f4e" />
         </MovimentFilter>
       </MovimentsHeader>
 
